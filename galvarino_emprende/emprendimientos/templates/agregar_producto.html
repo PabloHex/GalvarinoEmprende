@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Producto - Galvarino Emprende</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            font-family: 'Arial', sans-serif;
+        }
+        header, footer {
+            background-color: #2e4e75;
+            color: white;
+        }
+        main {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #2e4e75;
+            text-align: center;
+        }
+        .form-label {
+            font-weight: bold;
+            color: #2e4e75;
+        }
+        .btn-primary {
+            background-color: #2e4e75;
+            border: none;
+            font-weight: bold;
+        }
+        .btn-primary:hover {
+            background-color: #1f3a57;
+        }
+        .cancel-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .cancel-link a {
+            font-size: 1rem;
+            color: #2e4e75;
+            text-decoration: none;
+        }
+        .cancel-link a:hover {
+            text-decoration: underline;
+        }
+        nav a {
+            font-size: 1.1rem;
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            color: #aacceb;
+        }
+    </style>
+</head>
+<body>
+    <!-- Encabezado -->
+    <header class="py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <h1 class="mb-0">
+                <i class="fas fa-store"></i> Galvarino Emprende
+            </h1>
+            <nav>
+                <a href="{% url 'home' %}"><i class="fas fa-home"></i> Inicio</a>
+                <a href="{% url 'perfil' %}"><i class="fas fa-user"></i> Perfil</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}" class="btn btn-danger ms-3">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                    </a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-success ms-3">
+                        <i class="fas fa-sign-in-alt"></i> Iniciar sesión
+                    </a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main>
+        <h2>Agregar Nuevo Producto</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre del Producto</label>
+                {{ form.nombre }}
+            </div>
+            <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripción</label>
+                {{ form.descripcion }}
+            </div>
+            <div class="mb-3">
+                <label for="precio" class="form-label">Precio</label>
+                {{ form.precio }}
+            </div>
+            <div class="mb-3">
+                <label for="imagen" class="form-label">Imagen del Producto</label>
+                {{ form.imagen }}
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Agregar Producto</button>
+        </form>
+        <div class="cancel-link">
+            <a href="{% url 'perfil' %}">Volver al Perfil</a>
+        </div>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="text-center py-3 mt-5">
+        <div class="container">
+            <p>&copy; 2024 Galvarino Emprende. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
